@@ -571,6 +571,7 @@ input[type="password"]:focus {
 }
 
 /* 处理所有悬停效果，仅在支持悬停的设备上应用 */
+/*
 @media (any-hover: hover) {
     .title:hover {
         background: var(--bg-color);
@@ -653,11 +654,12 @@ input[type="password"]:focus {
         color: #000;
     }
     
-    /* 添加滚动条悬停效果 */
+
     textarea::-webkit-scrollbar-thumb:hover {
-        background-color: var(--button-hover); /* 统一使用主题色变量 */
+        background-color: var(--button-hover); 
     }
 }
+*/
 
 /* 移动设备适配 */
 @media (max-width: 768px) {
