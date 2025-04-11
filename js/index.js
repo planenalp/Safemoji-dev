@@ -388,7 +388,8 @@ outputText.addEventListener('input', () => {
     outputButtons.copy.classList.remove('is-success');
 });
 
-// 确保所有按钮点击都阻止冒泡和默认行为
+// 确保所有按钮点击都阻止默认行为（如失去焦点）
+// 同时处理 touchstart 和 mousedown 以兼容触摸和非触摸设备
 const allButtons = [
     inputButtons.expand, inputButtons.paste, inputButtons.clear,
     outputButtons.expand, outputButtons.copy, outputButtons.clear,
@@ -396,8 +397,13 @@ const allButtons = [
 ];
 
 allButtons.forEach(button => {
+    button.addEventListener('touchstart', (e) => {
+        // 阻止触摸开始时的默认行为（例如滚动、触发模拟的 mousedown 或导致文本框失焦）
+        e.preventDefault();
+    }, { passive: false }); // passive: false is important for preventDefault to work reliably on touchstart
+
     button.addEventListener('mousedown', (e) => {
-        // 阻止点击按钮导致文本框失去焦点
+        // 阻止鼠标按下时的默认行为（主要为了防止文本框失去焦点）
         e.preventDefault();
     });
 });

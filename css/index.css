@@ -718,7 +718,7 @@ input[type="password"]:focus {
 .button-group > .action-btn:active,
 .button-group > .file-drop-area:active,
 #saveFileArea:active { /* Add specific ID for higher specificity */
-    background-color: var(--button-hover); /* Use variable for #face64 */
+    background-color: #e9b54d;
     color: #000; /* Ensure text is readable */
     transform: none; /* Override scaling effect */
 }
