@@ -451,6 +451,9 @@ input[type="password"]:focus {
 
 .action-btn:active {
     transform: scale(0.95);
+    background-color: var(--button-hover);
+    color: #000;
+    transition: background-color 0.1s ease, color 0.1s ease;
 }
 
 .main-btn {
@@ -571,7 +574,6 @@ input[type="password"]:focus {
 }
 
 /* 处理所有悬停效果，仅在支持悬停的设备上应用 */
-/*
 @media (any-hover: hover) {
     .title:hover {
         background: var(--bg-color);
@@ -654,12 +656,11 @@ input[type="password"]:focus {
         color: #000;
     }
     
-
+    /* 添加滚动条悬停效果 */
     textarea::-webkit-scrollbar-thumb:hover {
-        background-color: var(--button-hover); 
+        background-color: var(--button-hover); /* 统一使用主题色变量 */
     }
 }
-*/
 
 /* 移动设备适配 */
 @media (max-width: 768px) {
@@ -733,6 +734,28 @@ input[type="password"]:focus {
     .action-btn,
     .file-msg {
         font-size: 12px;
+    }
+    
+    /* 移动端按钮按压效果优化 */
+    .action-btn:active,
+    .mode-btn:active,
+    .main-btn:active,
+    .menu-item:active,
+    .file-drop-area:active {
+        transform: none; /* 移除缩放效果，避免闪烁 */
+        background-color: var(--button-hover);
+        color: #000;
+        transition: background-color 0.1s ease, color 0.1s ease;
+    }
+    
+    /* 确保文件消息在按压时也变色 */
+    .file-drop-area:active .file-msg {
+        color: #000;
+    }
+    
+    /* 确保主按钮图标在按压时也变色 */
+    .main-btn:active span {
+        filter: brightness(0);
     }
 }
 
