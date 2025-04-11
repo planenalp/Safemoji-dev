@@ -73,8 +73,6 @@ body {
 
 .title:active {
     transform: scale(0.95);
-    background: #face64;
-    color: #000; /* Ensure text is readable */
 }
 
 .subtitle-container {
@@ -104,8 +102,6 @@ body {
 
 .subtitle:active {
     transform: scale(0.95);
-    background: #face64;
-    color: #000; /* Ensure text is readable */
 }
 
 .dropdown-menu {
@@ -205,8 +201,6 @@ body {
 
 .menu-item:active {
     transform: scale(0.95);
-    background: #face64;
-    color: #000; /* Ensure text is readable */
 }
 
 .menu-item.active {
@@ -276,8 +270,6 @@ body {
 
 .mode-btn:active {
     transform: scale(0.95);
-    background: #face64;
-    color: #000; /* Ensure text is readable */
 }
 
 .input-section,
@@ -455,8 +447,6 @@ input[type="password"]:focus {
 
 .action-btn:active {
     transform: scale(0.95);
-    background: #face64;
-    color: #000; /* Ensure text is readable */
 }
 
 .main-btn {
@@ -480,7 +470,6 @@ input[type="password"]:focus {
 
 .main-btn:active {
     transform: scale(0.95);
-    background: #face64; /* Explicitly set background */
 }
 
 .main-btn span {
@@ -729,13 +718,14 @@ input[type="password"]:focus {
 .button-group > .action-btn:active,
 .button-group > .file-drop-area:active,
 #saveFileArea:active { /* Add specific ID for higher specificity */
-    background: #face64; /* Change to requested color */
+    background-color: var(--button-hover); /* Use variable for #face64 */
     color: #000; /* Ensure text is readable */
     transform: none; /* Override scaling effect */
 }
 
-/* Ensure file-msg color changes for general active state */
-.file-drop-area:active .file-msg {
+/* Ensure file-msg color changes too */
+.button-group > .file-drop-area:active .file-msg,
+#saveFileArea:active .file-msg { /* Add specific ID */
     color: #000;
 }
 
@@ -744,8 +734,6 @@ input[type="password"]:focus {
 .file-drop-area:active {
     /* Keep or remove based on whether scaling is desired elsewhere */
     transform: scale(0.95);
-    background: #face64;
-    color: #000; /* Ensure text is readable */
 }
 
 /* Styles for Copy/Paste/Clear/Expand button text transition */
