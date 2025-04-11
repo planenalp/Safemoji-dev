@@ -72,7 +72,10 @@ body {
 }
 
 .title:active {
-    transform: scale(0.95);
+    /* Remove scaling, apply color change */
+    transform: none;
+    background-color: var(--button-hover);
+    color: #000;
 }
 
 .subtitle-container {
@@ -101,7 +104,10 @@ body {
 }
 
 .subtitle:active {
-    transform: scale(0.95);
+    /* Remove scaling, apply color change */
+    transform: none;
+    background-color: var(--button-hover);
+    color: #000;
 }
 
 .dropdown-menu {
@@ -200,16 +206,15 @@ body {
 }
 
 .menu-item:active {
-    transform: scale(0.95);
+    /* Remove scaling, apply color change */
+    transform: none;
+    background-color: var(--button-hover);
+    color: #000;
 }
 
 .menu-item.active {
     background: var(--button-hover);
     color: #000;
-}
-
-.menu-item:active {
-    transform: scale(0.95);
 }
 
 .container {
@@ -273,7 +278,10 @@ body {
 }
 
 .mode-btn:active {
-    transform: scale(0.95);
+    /* Remove scaling, apply color change */
+    transform: none;
+    background-color: var(--button-hover);
+    color: #000;
 }
 
 .input-section,
@@ -450,10 +458,10 @@ input[type="password"]:focus {
 }
 
 .action-btn:active {
-    transform: scale(0.95);
+    /* Apply unified active state */
+    transform: none;
     background-color: var(--button-hover);
     color: #000;
-    transition: background-color 0.1s ease, color 0.1s ease;
 }
 
 .main-btn {
@@ -476,7 +484,10 @@ input[type="password"]:focus {
 }
 
 .main-btn:active {
-    transform: scale(0.95);
+    /* Remove scaling, apply color change */
+    transform: none;
+    background-color: var(--button-hover);
+    color: #000;
 }
 
 .main-btn span {
@@ -735,50 +746,21 @@ input[type="password"]:focus {
     .file-msg {
         font-size: 12px;
     }
-    
-    /* 移动端按钮按压效果优化 */
-    .action-btn:active,
-    .mode-btn:active,
-    .main-btn:active,
-    .menu-item:active,
-    .file-drop-area:active {
-        transform: none; /* 移除缩放效果，避免闪烁 */
-        background-color: var(--button-hover);
-        color: #000;
-        transition: background-color 0.1s ease, color 0.1s ease;
-    }
-    
-    /* 确保文件消息在按压时也变色 */
-    .file-drop-area:active .file-msg {
-        color: #000;
-    }
-    
-    /* 确保主按钮图标在按压时也变色 */
-    .main-btn:active span {
-        filter: brightness(0);
-    }
 }
 
 /* Remove scaling and change color for active state inside button-group */
 .button-group > .action-btn:active,
 .button-group > .file-drop-area:active,
 #saveFileArea:active { /* Add specific ID for higher specificity */
-    background-color: #e9b54d;
+    /* Already sets transform: none; */
+    background-color: var(--button-hover); /* Use variable for consistency */
     color: #000; /* Ensure text is readable */
-    transform: none; /* Override scaling effect */
 }
 
 /* Ensure file-msg color changes too */
 .button-group > .file-drop-area:active .file-msg,
 #saveFileArea:active .file-msg { /* Add specific ID */
     color: #000;
-}
-
-/* General active state outside button-group (if needed elsewhere) */
-.action-btn:active,
-.file-drop-area:active {
-    /* Keep or remove based on whether scaling is desired elsewhere */
-    transform: scale(0.95);
 }
 
 /* Styles for Copy/Paste/Clear/Expand button text transition */
