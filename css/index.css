@@ -806,4 +806,35 @@ input[type="password"]:focus {
 .action-btn.is-query .btn-text.query {
     opacity: 1;
     pointer-events: auto; /* Allow interaction */
+}
+
+/* 添加触摸设备的激活状态 */
+@media (hover: none) and (pointer: coarse) {
+    .action-btn:active,
+    .mode-btn:active,
+    .main-btn:active,
+    .menu-item:active,
+    .file-drop-area:active,
+    #saveFileArea:active {
+        transform: scale(0.95);
+        background-color: var(--button-hover);
+        color: #000;
+    }
+    
+    .file-drop-area:active .file-msg,
+    #saveFileArea:active .file-msg {
+        color: #000;
+    }
+    
+    .mode-btn.active:active {
+        background-color: #e9b54d;
+    }
+    
+    .main-btn:active {
+        background-color: #e9b54d;
+    }
+    
+    .main-btn:active span {
+        filter: brightness(0);
+    }
 } 
