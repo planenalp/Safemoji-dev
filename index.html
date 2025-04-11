@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safemoji | Safe Worlds with Emoji</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <style>
+        :root {
+            --bg-color: #face64;
+            --title-color: #000000;
+        }
+        [data-theme="dark"] {
+            --bg-color: #000000;
+            --title-color: #face64;
+        }
+        body {
+            background-color: var(--bg-color);
+        }
+        .title {
+            color: var(--title-color);
+        }
+    </style>
+    <script>
+        // 立即设置主题，避免闪烁
+        document.documentElement.setAttribute('data-theme', 
+            localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'
+        );
+    </script>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <h1 class="title">Safemoji</h1>
+    <div class="subtitle-container">
+        <h2 class="subtitle" id="cipherSubtitle">AES-256-GCM & Base64</h2>
+        <div class="dropdown-menu" id="cipherMenu">
+            <div class="menu-section">
+                <div class="mode-switch menu-mode-switch">
+                    <button id="defaultBtn" class="mode-btn mode-btn-menu active" data-encrypt="AES-256-GCM" data-encode="Base64">
+                        <span>Default</span>
+                    </button>
+                    <button id="customBtn" class="mode-btn mode-btn-menu">
+                        <span>Custom</span>
+                    </button>
+                </div>
+            </div>
+            <div class="menu-section">
+                <div class="menu-row">
+                    <div class="menu-options" id="optionCipher">
+                        <div class="menu-item active" data-encrypt="AES-256-GCM">AES-256-GCM</div>
+                        <div class="menu-item" data-encrypt="ChaCha20-Poly1305">ChaCha20-Poly1305</div>
+                    </div>
+                </div>
+                <div class="menu-row">
+                    <div class="menu-options" id="optionBase">
+                        <div class="menu-item active" data-encode="Base64">Base64</div>
+                        <div class="menu-item" data-encode="Base128">Base128</div>
+                        <div class="menu-item" data-encode="Base256">Base256</div>
+                        <div class="menu-item" data-encode="Base512">Base512</div>
+                        <div class="menu-item" data-encode="Base1024">Base1024</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="mode-switch">
+            <button id="encryptBtn" class="mode-btn active">
+                <span>🔒</span>
+            </button>
+            <button id="decryptBtn" class="mode-btn">
+                <span>🔓</span>
+            </button>
+        </div>
+
+        <div class="input-section">
+            <textarea id="inputText" placeholder="Input"></textarea>
+            <div class="button-group">
+                <button class="action-btn" id="inputExpand">
+                    <span class="btn-text default">Expand</span>
+                    <span class="btn-text success">Collapse</span>
+                </button>
+                <button class="action-btn" id="inputPaste">
+                    <span class="btn-text default">Paste</span>
+                    <span class="btn-text success">Pasted</span>
+                </button>
+                <button class="action-btn" id="inputClear">
+                    <span class="btn-text default">Clear</span>
+                    <span class="btn-text success">Cleared</span>
+                    <span class="btn-text query">?????</span>
+                </button>
+                <div class="file-drop-area" id="fileDropArea">
+                    <span class="file-msg">Select or Drop</span>
+                    <input type="file" id="fileInput" class="file-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="password-section">
+            <input type="password" id="password" placeholder="Password (optional)">
+            <div class="button-group">
+                <button class="action-btn" id="passwordCopy">
+                    <span class="btn-text default">Copy</span>
+                    <span class="btn-text success">Copied</span>
+                </button>
+                <button class="action-btn" id="passwordPaste">
+                    <span class="btn-text default">Paste</span>
+                    <span class="btn-text success">Pasted</span>
+                </button>
+                <button class="action-btn" id="passwordClear">
+                    <span class="btn-text default">Clear</span>
+                    <span class="btn-text success">Cleared</span>
+                    <span class="btn-text query">?????</span>
+                </button>
+                <button class="action-btn" id="passwordGenerate">
+                    <span class="btn-text default">Generate</span>
+                    <span class="btn-text success">Generated</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="output-section">
+            <textarea id="outputText" placeholder="Output" readonly></textarea>
+            <div class="button-group">
+                <button class="action-btn" id="outputExpand">
+                    <span class="btn-text default">Expand</span>
+                    <span class="btn-text success">Collapse</span>
+                </button>
+                <button class="action-btn" id="outputCopy">
+                    <span class="btn-text default">Copy</span>
+                    <span class="btn-text success">Copied</span>
+                </button>
+                <button class="action-btn" id="outputClear">
+                    <span class="btn-text default">Clear</span>
+                    <span class="btn-text success">Cleared</span>
+                    <span class="btn-text query">?????</span>
+                </button>
+                <div class="file-drop-area" id="saveFileArea">
+                    <span class="file-msg">Save as...</span>
+                    <input type="file" id="saveFileInput" class="file-input" style="display: none;">
+                </div>
+            </div>
+        </div>
+
+        <button id="actionBtn" class="main-btn"><span>🔒</span></button>
+    </div>
+
+    <script src="js/cipher.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html> 

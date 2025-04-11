@@ -1,0 +1,809 @@
+:root {
+    /* Brand/Excepted Colors */
+    --bg-color: #face64;
+    --title-color: #000000;
+    --button-hover: #face64; /* Used for active states and default hovers */
+
+    /* GitHub Light Theme Colors */
+    --text-color: #24292f;
+    --container-bg: #ffffff;
+    --input-bg: #ffffff;
+    --input-border: #d0d7de;
+    --button-bg: #f6f8fa;
+    --button-text: #24292f;
+    --menu-bg: #ffffff;
+    --menu-text: #24292f;
+    --menu-border: #eaecef; /* Slightly lighter menu border */
+    --shadow-color: rgba(140, 149, 159, 0.2);
+}
+
+[data-theme="dark"] {
+    /* Brand/Excepted Colors */
+    --bg-color: #000000;
+    --title-color: #face64;
+    --button-hover: #face64; /* Used for active states and default hovers */
+
+    /* GitHub Dark Theme Colors */
+    --text-color: #c9d1d9;
+    --container-bg: #0d1117;
+    --input-bg: #161b22;
+    --input-border: #30363d;
+    --button-bg: #21262d;
+    --button-text: #c9d1d9;
+    --menu-bg: #161b22;
+    --menu-text: #c9d1d9;
+    --menu-border: #21262d; /* Darker menu border */
+    --shadow-color: rgba(0, 0, 0, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: var(--text-color);
+    transition: background-color 0.3s ease;
+}
+
+.title {
+    color: var(--title-color);
+    font-size: 64px;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+    position: relative;
+    letter-spacing: -1px;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 6px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.title:active {
+    transform: scale(0.95);
+}
+
+.subtitle-container {
+    position: relative;
+    margin: 0 0 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.subtitle {
+    color: var(--menu-text); /* Default color (used by dark theme) */
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Override subtitle color specifically for light theme */
+[data-theme="light"] .subtitle {
+    color: #666; /* Original approximate light theme text color */
+}
+
+.subtitle:active {
+    transform: scale(0.95);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) scale(0.8);
+    transform-origin: top center;
+    background: var(--menu-bg);
+    border-radius: 6px;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    padding: 10px;
+    z-index: 1000;
+    /* Restore opacity/pointer-events for transition */
+    opacity: 0;
+    pointer-events: none;
+    /* Remove display: none */
+    /* display: none; */ 
+    min-width: 400px;
+    max-width: calc(100vw - 40px);
+    /* Remove margin-top */
+    /* margin-top: 5px; */
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Remove pointer-events from base style if using display none/block */
+/* opacity: 0; */
+/* pointer-events: none; */
+
+.dropdown-menu.show {
+    /* Remove display: block */
+    /* display: block; */ 
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+    pointer-events: auto;
+}
+
+.menu-section {
+    margin-bottom: 10px;
+}
+
+.menu-section:last-child {
+    margin-bottom: 0;
+}
+
+.menu-header {
+    font-weight: bold;
+    color: var(--menu-text);
+    padding: 5px 10px;
+    border-bottom: 1px solid var(--menu-border);
+    margin-bottom: 5px;
+    text-align: center;
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+.menu-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 0;
+}
+
+.menu-label {
+    color: var(--menu-text);
+    font-size: 14px;
+    padding: 5px 10px;
+    flex-shrink: 0;
+    width: 60px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.menu-options {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 5px;
+    justify-content: center;
+    background: var(--button-bg);
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.menu-item {
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    color: var(--menu-text);
+    margin: 0 5px;
+    /* Prevent text selection on click */
+    user-select: none;
+    -webkit-user-select: none; /* For Safari */
+}
+
+.menu-item:active {
+    transform: scale(0.95);
+}
+
+.menu-item.active {
+    background: var(--button-hover);
+    color: #000;
+}
+
+.menu-item:active {
+    transform: scale(0.95);
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    background: var(--container-bg);
+    padding: 30px;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    margin-bottom: auto;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mode-switch {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.mode-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    background: var(--button-bg);
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    color: var(--button-text);
+    height: 40px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.mode-btn.active {
+    background: var(--button-hover);
+    color: #000;
+}
+
+.mode-btn span {
+    font-size: 20px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    filter: brightness(0);
+}
+
+.mode-btn.active span {
+    filter: brightness(0);
+}
+
+.mode-btn svg {
+    fill: currentColor;
+}
+
+.mode-btn:active {
+    transform: scale(0.95);
+}
+
+.input-section,
+.output-section {
+    position: relative;
+    padding-bottom: 40px;
+    margin-bottom: 20px;
+}
+
+.password-section {
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 40px;
+}
+
+textarea {
+    padding: 12px;
+    border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    width: 100%;
+    border-top: 1px solid var(--input-border);
+    border-left: 1px solid var(--input-border);
+    border-right: 1px solid var(--input-border);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    font-size: 16px;
+    resize: none;
+    min-height: 150px;
+    height: 150px;
+    background: var(--input-bg);
+    color: var(--text-color);
+    transition: height 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    overflow: auto;
+    display: block;
+}
+
+/* Style scrollbars for Webkit browsers */
+textarea::-webkit-scrollbar {
+    width: 12px; /* 增加滚动条宽度 */
+    margin-right: 4px; /* 尝试使滚动条向左移动一些 */
+    cursor: default; /* 使用默认光标 */
+}
+
+textarea::-webkit-scrollbar-track {
+    background: transparent; /* Make track transparent */
+    border-top-right-radius: 6px; /* Match textarea corner radius */
+    border-bottom-right-radius: 6px; /* Match potential bottom radius if buttons weren't there */
+    margin-right: 4px; /* 尝试使轨道向左移动 */
+    cursor: default; /* 使用默认光标 */
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background-color: var(--input-border); /* Scrollbar handle color */
+    border-radius: 4px; /* Rounded scrollbar handle */
+    border: 2px solid transparent; /* 边框透明，看起来会更靠左 */
+    background-clip: padding-box; /* 确保背景不会延伸到边框下 */
+    
+    /* 滚动条长度根据内容自动调整 */
+    min-height: calc(30px + (100% - 150px) * 0.1);
+    
+    cursor: pointer; /* 滚动条把手使用指针光标 */
+}
+
+/* 移除这里的悬停效果，改为放在媒体查询中 */
+/* textarea::-webkit-scrollbar-thumb:hover {
+    background-color: #a0a0a0;
+} */
+
+textarea.expanded {
+    height: 500px;
+    overflow-y: auto;
+}
+
+input[type="password"] {
+    width: 100%;
+    border: 1px solid var(--input-border);
+    border-bottom: none;
+    border-radius: 6px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: 12px;
+    min-height: auto;
+    height: 40px;
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--text-color);
+    background: var(--input-bg);
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+textarea:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: var(--button-hover);
+}
+
+/* Handle button-group border color when parent section is focused */
+.input-section.focused .button-group,
+.output-section.focused .button-group,
+.password-section.focused .button-group {
+    border-color: var(--button-hover);
+    /* Explicitly set top border color to ensure consistency */
+    border-top-color: var(--button-hover);
+}
+
+/* Handle separator line color when parent section is focused */
+.input-section.focused .button-group > *:not(:last-child),
+.output-section.focused .button-group > *:not(:last-child),
+.password-section.focused .button-group > *:not(:last-child) {
+    border-right-color: var(--button-hover);
+}
+
+.button-group {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: var(--input-bg);
+    border-left: 1px solid var(--input-border);
+    border-right: 1px solid var(--input-border);
+    border-bottom: 1px solid var(--input-border);
+    border-top: 1px solid var(--input-border);
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    overflow: hidden;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    box-sizing: border-box; /* 确保边框包含在高度内 */
+}
+
+.button-group > .action-btn,
+.button-group > .file-drop-area {
+    border: none;
+    border-radius: 0;
+    height: 100%; /* 改为100%以完全填充父容器 */
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease, border-right-color 0.3s ease;
+}
+
+.button-group > .action-btn:not(:last-child),
+.button-group > .file-drop-area:not(:last-child) {
+    border-right: 1px solid var(--input-border);
+}
+
+.button-group > .file-drop-area {
+    background: var(--button-bg);
+    border: none;
+}
+
+.button-group > .file-drop-area .file-msg {
+    padding: 0 5px;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    background: var(--button-bg);
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    color: var(--button-text);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.action-btn:active {
+    transform: scale(0.95);
+}
+
+.main-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    padding: 12px;
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    background: var(--button-hover);
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.main-btn:active {
+    transform: scale(0.95);
+}
+
+.main-btn span {
+    font-size: 20px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    filter: brightness(0);
+}
+
+.file-drop-area {
+    flex: 1;
+    height: 40px;
+    border: 1px dashed var(--input-border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: var(--button-bg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.file-drop-area.highlight {
+    border-color: var(--button-hover);
+    background-color: var(--button-hover);
+}
+
+.file-msg {
+    font-size: 14px;
+    color: var(--menu-text);
+    text-align: center;
+    pointer-events: none;
+    transition: color 0.3s ease;
+    font-family: inherit; /* 确保字体与按钮一致 */
+    font-weight: normal; /* 确保字重与按钮一致 */
+    line-height: 1.2; /* 确保行高与按钮一致 */
+}
+
+.file-drop-area:hover {
+    background: var(--button-hover);
+}
+
+.file-drop-area:hover .file-msg {
+    color: #000;
+}
+
+#saveFileArea {
+    cursor: pointer;
+}
+
+#saveFileArea:hover {
+    background: var(--button-hover);
+}
+
+#saveFileArea:hover .file-msg {
+    color: #000;
+}
+
+.file-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.menu-mode-switch {
+    margin: 5px 0 15px;
+    justify-content: center;
+}
+
+.mode-btn-menu {
+    height: 30px;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.mode-btn-menu span {
+    font-weight: 500;
+    font-size: 14px;
+    filter: none;
+}
+
+.mode-btn-menu.active span {
+    filter: none;
+}
+
+/* 处理所有悬停效果，仅在支持悬停的设备上应用 */
+@media (any-hover: hover) {
+    .title:hover {
+        background: var(--bg-color);
+        color: var(--title-color);
+    }
+    
+    [data-theme="light"] .title:hover {
+        background: #000000;
+        color: #face64;
+    }
+    
+    [data-theme="dark"] .title:hover {
+        background: #face64;
+        color: #000000;
+    }
+    
+    .subtitle:hover {
+        background: var(--bg-color);
+        color: var(--title-color);
+    }
+    
+    [data-theme="light"] .subtitle:hover {
+        background: #000000;
+        color: #face64;
+    }
+    
+    [data-theme="dark"] .subtitle:hover {
+        background: #face64;
+        color: #000000;
+    }
+    
+    .menu-item:hover {
+        background: var(--button-hover);
+        color: #000;
+    }
+    
+    .mode-btn:hover {
+        background: var(--button-hover);
+        color: #000;
+    }
+    
+    .mode-btn.active:hover {
+        background: #e9b54d;
+    }
+    
+    .mode-btn.active span {
+        filter: brightness(0);
+    }
+    
+    .mode-btn svg {
+        fill: currentColor;
+    }
+    
+    .action-btn:hover {
+        background: var(--button-hover);
+        color: #000;
+    }
+    
+    .main-btn:hover {
+        background: #e9b54d;
+    }
+    
+    .main-btn:hover span {
+        filter: brightness(0);
+    }
+    
+    .file-drop-area:hover {
+        background: var(--button-hover);
+    }
+    
+    .file-drop-area:hover .file-msg {
+        color: #000;
+    }
+    
+    #saveFileArea:hover {
+        background: var(--button-hover);
+    }
+    
+    #saveFileArea:hover .file-msg {
+        color: #000;
+    }
+    
+    /* 添加滚动条悬停效果 */
+    textarea::-webkit-scrollbar-thumb:hover {
+        background-color: var(--button-hover); /* 统一使用主题色变量 */
+    }
+}
+
+/* 移动设备适配 */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+    
+    .title {
+        font-size: 42px;
+        margin: 0;
+    }
+    
+    .subtitle-container {
+        margin: 0 0 10px 0;
+    }
+    
+    .subtitle {
+        font-size: 14px;
+        padding: 3px 8px;
+    }
+    
+    .container {
+        padding: 20px;
+        margin-bottom: 0; /* Prevent extra space at bottom on mobile */
+    }
+
+    .dropdown-menu {
+        /* Override min-width to allow shrinking */
+        min-width: auto;
+        padding: 8px;
+    }
+
+    .menu-item {
+        font-size: 12px;
+        padding: 4px 8px;
+        /* Slightly reduce margin for better fit */
+        margin: 0 2px;
+    }
+
+    .menu-mode-switch {
+        margin: 5px 0 10px;
+        gap: 5px;
+    }
+
+    .mode-btn-menu {
+        height: 28px;
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+
+    .mode-btn-menu span {
+        font-size: 12px;
+    }
+
+    /* Remove specific mobile height for textarea */
+    /*
+    textarea {
+        min-height: 200px;
+        height: 200px;
+    }
+    */
+
+    /* Remove specific mobile height for password input to maintain original height */
+    /*
+    input[type="password"] {
+        height: 36px;
+        min-height: auto; 
+    }
+    */
+
+    .action-btn,
+    .file-msg {
+        font-size: 12px;
+    }
+}
+
+/* Remove scaling and change color for active state inside button-group */
+.button-group > .action-btn:active,
+.button-group > .file-drop-area:active,
+#saveFileArea:active { /* Add specific ID for higher specificity */
+    background-color: #e9b54d;
+    color: #000; /* Ensure text is readable */
+    transform: none; /* Override scaling effect */
+}
+
+/* Ensure file-msg color changes too */
+.button-group > .file-drop-area:active .file-msg,
+#saveFileArea:active .file-msg { /* Add specific ID */
+    color: #000;
+}
+
+/* General active state outside button-group (if needed elsewhere) */
+.action-btn:active,
+.file-drop-area:active {
+    /* Keep or remove based on whether scaling is desired elsewhere */
+    transform: scale(0.95);
+}
+
+/* Styles for Copy/Paste/Clear/Expand button text transition */
+.action-btn#inputPaste,
+.action-btn#outputCopy,
+.action-btn#inputClear,
+.action-btn#outputClear,
+.action-btn#inputExpand,
+.action-btn#outputExpand,
+.action-btn#passwordCopy,
+.action-btn#passwordPaste,
+.action-btn#passwordClear,
+.action-btn#passwordGenerate {
+    position: relative;
+    overflow: hidden; /* Hide overflowing text if needed */
+}
+
+.action-btn .btn-text {
+    display: flex; /* Use flex to center content */
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* Prevent interacting with the hidden span */
+}
+
+.action-btn .btn-text.default {
+    opacity: 1;
+    pointer-events: auto; /* Allow interaction */
+}
+
+.action-btn .btn-text.success,
+.action-btn .btn-text.query {
+    opacity: 0;
+}
+
+.action-btn.is-success .btn-text.default,
+.action-btn.is-success .btn-text.query,
+.action-btn.is-query .btn-text.default,
+.action-btn.is-query .btn-text.success {
+    opacity: 0;
+    pointer-events: none; /* Prevent interaction */
+}
+
+.action-btn.is-success .btn-text.success,
+.action-btn.is-query .btn-text.query {
+    opacity: 1;
+    pointer-events: auto; /* Allow interaction */
+} 
