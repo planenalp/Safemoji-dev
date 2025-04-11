@@ -72,10 +72,9 @@ body {
 }
 
 .title:active {
-    /* Remove scaling, apply color change */
-    transform: none;
-    background-color: var(--button-hover);
-    color: #000;
+    transform: scale(0.95);
+    background: #face64;
+    color: #000; /* Ensure text is readable */
 }
 
 .subtitle-container {
@@ -104,10 +103,9 @@ body {
 }
 
 .subtitle:active {
-    /* Remove scaling, apply color change */
-    transform: none;
-    background-color: var(--button-hover);
-    color: #000;
+    transform: scale(0.95);
+    background: #face64;
+    color: #000; /* Ensure text is readable */
 }
 
 .dropdown-menu {
@@ -206,10 +204,9 @@ body {
 }
 
 .menu-item:active {
-    /* Remove scaling, apply color change */
-    transform: none;
-    background-color: var(--button-hover);
-    color: #000;
+    transform: scale(0.95);
+    background: #face64;
+    color: #000; /* Ensure text is readable */
 }
 
 .menu-item.active {
@@ -278,10 +275,9 @@ body {
 }
 
 .mode-btn:active {
-    /* Remove scaling, apply color change */
-    transform: none;
-    background-color: var(--button-hover);
-    color: #000;
+    transform: scale(0.95);
+    background: #face64;
+    color: #000; /* Ensure text is readable */
 }
 
 .input-section,
@@ -458,10 +454,9 @@ input[type="password"]:focus {
 }
 
 .action-btn:active {
-    /* Apply unified active state */
-    transform: none;
-    background-color: var(--button-hover);
-    color: #000;
+    transform: scale(0.95);
+    background: #face64;
+    color: #000; /* Ensure text is readable */
 }
 
 .main-btn {
@@ -484,10 +479,8 @@ input[type="password"]:focus {
 }
 
 .main-btn:active {
-    /* Remove scaling, apply color change */
-    transform: none;
-    background-color: var(--button-hover);
-    color: #000;
+    transform: scale(0.95);
+    background: #face64; /* Explicitly set background */
 }
 
 .main-btn span {
@@ -533,24 +526,8 @@ input[type="password"]:focus {
     line-height: 1.2; /* 确保行高与按钮一致 */
 }
 
-.file-drop-area:hover {
-    background: var(--button-hover);
-}
-
-.file-drop-area:hover .file-msg {
-    color: #000;
-}
-
 #saveFileArea {
     cursor: pointer;
-}
-
-#saveFileArea:hover {
-    background: var(--button-hover);
-}
-
-#saveFileArea:hover .file-msg {
-    color: #000;
 }
 
 .file-input {
@@ -650,7 +627,7 @@ input[type="password"]:focus {
     .main-btn:hover span {
         filter: brightness(0);
     }
-    
+
     .file-drop-area:hover {
         background: var(--button-hover);
     }
@@ -658,7 +635,7 @@ input[type="password"]:focus {
     .file-drop-area:hover .file-msg {
         color: #000;
     }
-    
+
     #saveFileArea:hover {
         background: var(--button-hover);
     }
@@ -752,15 +729,23 @@ input[type="password"]:focus {
 .button-group > .action-btn:active,
 .button-group > .file-drop-area:active,
 #saveFileArea:active { /* Add specific ID for higher specificity */
-    /* Already sets transform: none; */
-    background-color: var(--button-hover); /* Use variable for consistency */
+    background: #face64; /* Change to requested color */
     color: #000; /* Ensure text is readable */
+    transform: none; /* Override scaling effect */
 }
 
-/* Ensure file-msg color changes too */
-.button-group > .file-drop-area:active .file-msg,
-#saveFileArea:active .file-msg { /* Add specific ID */
+/* Ensure file-msg color changes for general active state */
+.file-drop-area:active .file-msg {
     color: #000;
+}
+
+/* General active state outside button-group (if needed elsewhere) */
+.action-btn:active,
+.file-drop-area:active {
+    /* Keep or remove based on whether scaling is desired elsewhere */
+    transform: scale(0.95);
+    background: #face64;
+    color: #000; /* Ensure text is readable */
 }
 
 /* Styles for Copy/Paste/Clear/Expand button text transition */
